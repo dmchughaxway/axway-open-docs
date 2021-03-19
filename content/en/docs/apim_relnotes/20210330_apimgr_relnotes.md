@@ -24,8 +24,9 @@ The new cipher scheme is backwards compatible with the old cipher scheme. The ne
 
 If an upgrading customer wishes to take advantage of the new cipher scheme then they must:
 
-1. Change the group passphrase via the managedomain script OR via the PUT /deployment/passphrase/group/{groupID} end-point. This will re-encrypt all the encrypted data in the group FED. 
-2. Run the KPS Admin Re-encrypt command to re-encrypt the KPS data. 
+1. Change the node manager passphrase via the managedomain script OR via the PUT /deployment/passphrase/nodemanager/{serviceID} end-point. This will re-encrypt the private key used for communication between Node Manager and Gateway via mutual SSL. 
+2. Change the group passphrase via the managedomain script OR via the PUT /deployment/passphrase/group/{groupID} end-point. This will re-encrypt all the encrypted data in the group FED.
+3. Run the KPS Admin Re-encrypt command to re-encrypt the KPS data. 
 
 **Please Note:** Depending on data volumes, the re-encryption operation can take some time. During this time, the KPS is in Admin mode. Therefore, this action should only be undertaken during a maintenance window. 
 
