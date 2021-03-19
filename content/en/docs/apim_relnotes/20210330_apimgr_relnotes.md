@@ -16,6 +16,14 @@ Docker deployment is supported on Linux. For a summary of the system requirement
 
 The following new features and enhancements are available in this update.
 
+### Upgraded Cipher Scheme
+
+
+
+### Passphrase Policy Enforcement
+
+
+
 ### Critical header parameter (“crit”)
 
 A “crit” header was added to the JWT Verify filter in Policy Studio. This allows you to add a “crit” header list to the filter, and the JWT token being processed in the filter is then validated against this list.
