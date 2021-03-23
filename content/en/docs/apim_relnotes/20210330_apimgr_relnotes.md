@@ -16,6 +16,35 @@ Docker deployment is supported on Linux. For a summary of the system requirement
 
 The following new features and enhancements are available in this update.
 
+### Upgraded Cipher Scheme
+
+The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private Keys etc.) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
+
+The new cipher scheme is backwards compatible with the old cipher scheme. The new cipher scheme will be able to decrypt data which was encrypted in the old cipher scheme.
+
+The entity store will be re-encrypted as part of the upgrade process. For more information, see [Upgrade Steps](docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/index.html)
+
+The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/index.html)
+
+**Please Note:** Depending on data volumes, the re-encryption operation can take some time. During this time, the KPS is in Admin mode. Therefore, this action should only be undertaken during a maintenance window.
+
+### Passphrase Policy Enforcement
+
+A new passphrase policy and 2 new end-points to manage that passphrase policy were introduced in the January release.
+
+* GET /topology/passphrasepolicy
+* PUT /topology/passphrasepolicy
+
+The passphrase policy ships by default as ***disabled***. To enable, call the PUT /topology/passphrasepolicy end-point.
+
+As of the March release, once the passphrase policy is ***enabled***, we are enforcing that policy when the node manager or their group passphrases are changed via:
+
+* managedomin script
+* PUT /deployment/passphrase/nodemanager/{serviceID}
+* PUT /deployment/passphrase/group/{groupID}
+
+With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases such as 'password’ or ‘1234’ etc.
+
 ### Critical header parameter (“crit”)
 
 A “crit” header was added to the JWT Verify filter in Policy Studio. This allows you to add a “crit” header list to the filter, and the JWT token being processed in the filter is then validated against this list.
