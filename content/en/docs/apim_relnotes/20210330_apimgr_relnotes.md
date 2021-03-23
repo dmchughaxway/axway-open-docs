@@ -22,9 +22,9 @@ The cipher scheme for all encrypted data in the system (such as Database/LDAP pa
 
 The new cipher scheme is backwards compatible with the old cipher scheme. The new cipher scheme will be able to decrypt data which was encrypted in the old cipher scheme.
 
-The entity store will be re-encrypted as part of the upgrade process. For more information, see [Upgrade Steps](docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/index.html)
+The entity store will be re-encrypted as part of the upgrade process. For more information, see [Upgrade Steps](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion)
 
-The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/index.html)
+The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command)
 
 **Please Note:** Depending on data volumes, the re-encryption operation can take some time. During this time, the KPS is in Admin mode. Therefore, this action should only be undertaken during a maintenance window.
 
