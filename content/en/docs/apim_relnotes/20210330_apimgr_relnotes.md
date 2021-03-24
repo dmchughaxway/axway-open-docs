@@ -22,11 +22,17 @@ The cipher scheme for all encrypted data in the system (such as Database/LDAP pa
 
 The new cipher scheme is backwards compatible with the old cipher scheme. The new cipher scheme will be able to decrypt data which was encrypted in the old cipher scheme.
 
-The entity store will be re-encrypted as part of the upgrade process. For more information, see [Upgrade Steps](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion)
+The entity store will be re-encrypted as part of the upgrade process.
 
 The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
 **Please Note:** Depending on data volumes, the key property store re-encryption operation can take some time. This action should only be undertaken during a maintenance window.
+
+Encrypted KPS data can no longer be transferred directly between environments with different domain ids from this release onwards, even where the passphrase in use is the same in both environments. This is because the new encryption scheme uses a master salt which is based on the domain Id of the environment. Instead, you must either:
+
+* Use the KPS Admin Backup and Restore process. The restore command will now decrypt the data from the source environment and re-encrypt the data for the target environment. For more information see, [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore)
+Or
+* Use the Cassandra Backup and Restore process and run KPS Admin re-encrypt. For more information see, [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) and [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
 ### Passphrase Policy Enforcement
 
