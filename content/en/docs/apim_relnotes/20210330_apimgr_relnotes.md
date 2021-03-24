@@ -24,9 +24,9 @@ The new cipher scheme is backwards compatible with the old cipher scheme. The ne
 
 The entity store will be re-encrypted as part of the upgrade process. For more information, see [Upgrade Steps](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion)
 
-The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command)
+The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
-**Please Note:** Depending on data volumes, the re-encryption operation can take some time. During this time, the KPS is in Admin mode. Therefore, this action should only be undertaken during a maintenance window.
+**Please Note:** Depending on data volumes, the key property store re-encryption operation can take some time. This action should only be undertaken during a maintenance window.
 
 ### Passphrase Policy Enforcement
 
