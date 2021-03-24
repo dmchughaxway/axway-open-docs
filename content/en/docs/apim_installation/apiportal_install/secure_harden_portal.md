@@ -81,11 +81,31 @@ To encrypt your database password, run:
 
 You will be prompted to enter a passphrase and your database password.
 
-The script uses the passphrase to encrypt the database password, which is now stored encrypted in the `<API_Portal_install_path>/configuration.php` file, and to decrypt the database password on each connection request.
+The script uses the passphrase to encrypt and decrypt the database password on each connection request. The database password is stored encrypted in the `<API_Portal_install_path>/configuration.php` file. Only the password is decrypted on each connection request, not the whole payload, so no significant performance impact is expected.
 
-Only the password is decrypted on each connection request, not the whole payload, so no significant performance impact is expected.
+Note that if you encrypt your database password, you cannot use the [database secure connection](/docs/apim_installation/apiportal_install/install_software_configure_database/#configure-the-database-server-for-secure-connection) option.
 
-{{< alert title="Note" color="primary" >}}This option cannot be used in combination with [database secure connection](#disable-tls-1-0-and-tls-1-1-on-apache).{{< /alert >}}
+## Update the database password
+
+This section shows how you can update an encrypted database password.
+
+### Update an encrypted password
+
+To update an encrypted password:
+
+1. Change the database password in your database server.
+2. Run the `apiportal_db_pass_encryption.sh` script and provide the new database password to use.
+
+### Update an encrypted password to plaintext password
+
+To update an encrypted password to plaintext password:
+
+1. Change the database password in your database server.
+2. Edit your `configuration.php` file.
+3. Locate the line that starts with `public $password =` and replace its value with the plaintext MySQL password. Ensure to follow [PHP quoting rules](https://www.php.net/manual/en/language.types.string.php) for any special characters in the password.
+4. Locate the `public $dbtype = 'mysqli_encrypted'` line and replace it with `public $dbtype = 'mysqli'`.
+
+To encrypt your plaintext password, see [Encrypt database password](#encrypt-database-password).
 
 ## Limit the number of failed login attempts
 
@@ -130,13 +150,25 @@ Add security headers to the `apiportal.conf` file (located in `/etc/httpd/conf.d
 In the virtual host directive add the following:
 
 ```
-Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure;SameSite=Strict
+Header edit Set-Cookie "(?i)^((?:(?!;\s?HttpOnly).)+)$" "$1; HttpOnly"
+Header edit Set-Cookie "(?i)^((?:(?!;\s?Secure).)+)$" "$1; Secure"
+Header unset X-Frame-Options
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-XSS-Protection "1; mode=block"
 Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains;"
 Header set X-Content-Type-Options nosniff
 Header set Referrer-Policy "same-origin"
 ```
+
+{{< alert title="Note" color="" >}}`SameSite` attribute is not compatible with SSO.
+
+If you are not using SSO, we recommend you to add `SameSite` to the host directive so that the cookies are sent only in First-Party (API Portal) context, and not along with requests initiated by Third-Party websites.
+
+```
+`Header edit Set-Cookie "(?i)^((?:(?!;\s?SameSite=Strict).)+)$" "$1; SameSite=Strict"`
+```
+
+{{< /alert >}}
 
 You should only use the HSTS header if you have configured SSL.
 
@@ -165,7 +197,7 @@ Restart Apache after modifying the `apiportal.conf` and `security.conf` files.
 Find the location of your `php.ini` file. For example, run the command:
 
 ```
-php –i | grep php.ini
+php -i | grep php.ini
 ```
 
 In the resulting list of files, the `php.ini` listed as the `Loaded Configuration File` is the correct file to edit.
@@ -174,17 +206,18 @@ Update the file with the following options:
 
 ```
 - expose_php = 0
-- display_errors = 0
-- disable_functions = exec,passthru,shell_exec,system
-- allow_url_include = 0
+- display_errors = Off
+- disable_functions = "passthru,shell_exec,system"
+- allow_url_include = Off
 - session.cookie_httponly = 1
 - session.cookie_secure = On
-- open_basedir = “/opt/axway/apiportal/htdoc:/tmp”
+- session.cookie_samesite = "Strict"
+- open_basedir = "/opt/axway/apiportal/htdoc:/tmp"
 ```
 
 You should only set `session.cookie_secure` to `On` if you have configured SSL.
 
-Set `open_basedir` to a list of directories (use `:` to separate directories):
+The `open_basedir` option must be added after the installation is finished. Set `open_basedir` to a list of directories (use `:` to separate directories):
 
 * API Portal root directory
 * Value of `upload_tmp_dir` or `/tmp` if it is empty
@@ -298,11 +331,17 @@ RewriteRule ^ - [R=415,L]
 
 It is best practice to reject requests from HTTP methods that are not being used with the response `405 Method Not Allowed`. For example, allowing requests from the `TRACE` method might result in Cross-Site Tracing (XST) attacks. Similarly, allowing requests from `PUT` and `DELETE` methods might expose vulnerabilities to the file system.
 
+`OPTIONS` method reports which HTTP methods are allowed on the web server, it is mainly used for debugging purposes. If you do not plan to run a diagnostic or debug the server, consider disabling this method.
+
 `GET` and `POST` requests are mandatory for API Portal. You must also allow requests from the HTTP methods your listed APIs support, so users can send requests to them from the Try It page.
 
 Add this configuration in your `.htaccess` or virtual host file. The following example allows only `GET`, `POST`, and `PUT` methods:
 
 ```
+# Disable OPTIONS method
+RewriteCond %{REQUEST_METHOD} ^OPTIONS
+RewriteRule .* - [F]
+
 # Disable TRACE method
 TraceEnable off
 

@@ -321,7 +321,7 @@ const collections = [{
   name: 'amplify_relnotes',
   label: 'AMPLIFY Release notes',
   label_singular: 'page in AMPLIFY Release notes section',
-  description: 'Release notes for AMPLIFY Central and AMPLIFY Catalog',
+  description: 'Release notes for AMPLIFY Central',
   format: 'frontmatter',
 }, {
   ...docsDefaults('central/connect-api-manager', 'central/connect-api-manager'),
@@ -338,6 +338,13 @@ const collections = [{
   description: 'All pages relating to Connect AWS Gateway.',
   format: 'frontmatter',
 }, {
+  ...docsDefaults('central/connect-azure-gateway', 'central/connect-azure-gateway'),
+  name: 'connect-azure-gateway',
+  label: 'Connect Azure Gateway documentation',
+  label_singular: 'page in Connect Azure Gateway',
+  description: 'All pages relating to Connect Azure Gateway.',
+  format: 'frontmatter',
+}, {
   ...docsDefaults('central/cli_central', 'central/cli_central'),
   name: 'cli_central',
   label: 'Get started with AMPLIFY Central CLI',
@@ -350,6 +357,13 @@ const collections = [{
   label: 'AMPLIFY Unified Catalog documentation',
   label_singular: 'page in AMPLIFY Unified Catalog',
   description: 'All pages relating to AMPLIFY Unified Catalog.',
+  format: 'frontmatter',
+}, {
+  ...docsDefaults('catalog/catalog_relnotes', 'catalog'),
+  name: 'catalog_relnotes',
+  label: 'AMPLIFY Unified Catalog Release notes',
+  label_singular: 'page in AMPLIFY Unified Catalog Release notes section',
+  description: 'Release notes for AMPLIFY Unified Catalog',
   format: 'frontmatter',
 }, {
   ...docsDefaults('contribution_guidelines', 'contributing'),
@@ -381,7 +395,7 @@ const collections = [{
   folder: 'content/en/blog/friends',
 }];
 
-const cms_branch = window.location.hostname.includes('developjan21') ? 'developjan21' : 'master';
+const cms_branch = window.location.hostname.includes('developmar21') ? 'developmar21' : 'master';
 
 const config = {
   backend: {
