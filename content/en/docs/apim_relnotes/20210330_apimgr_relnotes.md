@@ -20,30 +20,18 @@ The following new features and enhancements are available in this update.
 
 The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private Keys etc.) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
 
-The new cipher scheme is backwards compatible with the old cipher scheme. The new cipher scheme will be able to decrypt data which was encrypted in the old cipher scheme.
-
-The entity store will be re-encrypted as part of the upgrade process.
-
-The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
-
-**Please Note:** Depending on data volumes, the key property store re-encryption operation can take some time. This action should only be undertaken during a maintenance window.
-
-Encrypted KPS data can no longer be transferred directly between environments with different domain ids from this release onwards, even where the passphrase in use is the same in both environments. This is because the new encryption scheme uses a master salt which is based on the domain Id of the environment. Instead, you must either:
-
-* Use the KPS Admin Backup and Restore process. The restore command will now decrypt the data from the source environment and re-encrypt the data for the target environment. For more information see, [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore)
-Or
-* Use the Cassandra Backup and Restore process and run KPS Admin re-encrypt. For more information see, [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) and [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+This feature has introduced changes related to how sensitive data is managed, how data can be migrated between environments  and how data can be encrypted in custom libraries or policy studio script filters. For further information, see [Upgrade guide](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-7720210330-and-beyond).
 
 ### Passphrase Policy Enforcement
 
-A new passphrase policy and 2 new end-points to manage that passphrase policy were introduced in the January release.
+A new passphrase policy and 2 new end-points to manage that passphrase policy have been introduced.
 
 * GET /topology/passphrasepolicy
 * PUT /topology/passphrasepolicy
 
-The passphrase policy ships by default as ***disabled***. To enable, call the PUT /topology/passphrasepolicy end-point.
+The passphrase policy ships by default as ***disabled***. To enable, call the PUT /topology/passphrasepolicy end-point. For more information see, [Configure a passphrase policy](/docs/apim_administration/apigtw_admin/manage_user_access/#configure-a-passphrase-policy-for-node-managers-and-api-gateway-groups).
 
-As of the March release, once the passphrase policy is ***enabled***, we are enforcing that policy when the node manager or their group passphrases are changed via:
+Once the passphrase policy is ***enabled***, we are enforcing that policy when the node manager or their group passphrases are changed via:
 
 * managedomin script
 * PUT /deployment/passphrase/nodemanager/{serviceID}
@@ -63,14 +51,9 @@ Rate limit monitors the number of requests that a user can send to API Manager d
 
 For more information, see [Configure the API Manager request rate limiter](/docs/apim_administration/apimgr_admin/api_mgmt_config/#configure-api-manager-request-rate-limiter).
 
-### placeholder 2
+### Certification with MySQl 8
 
-placeholder text
-
-For more information, see:
-
-* [some reference 1](/docs/placeholder)
-* [some reference 2](/docs/placeholder)
+The product is now certified as compatible with MySQL 8. For further information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
 
 ### YAML configuration store (Technical preview capability)
 
