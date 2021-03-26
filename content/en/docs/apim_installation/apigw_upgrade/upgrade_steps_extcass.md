@@ -406,9 +406,6 @@ The configuration files are:
 
 You must repeat this for each instance configured with SSO.
 
-## Updating to 7.7 March 2021 Release (7.7.20210330) and beyond
-If upgrading to version 7.7.20210330 or beyond, please take note of the information outlined in the Update guide. For further information, see [Update guide](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-77-march-2021-release-7720210330-and-beyond)
-
 ## Support services
 
 The Axway Global Support team provides worldwide 24 x 7 support for customers with active support agreements.

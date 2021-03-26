@@ -18,26 +18,23 @@ The following new features and enhancements are available in this update.
 
 ### Upgraded Cipher Scheme
 
-The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private Keys etc.) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
+The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private keys, and son on) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
 
-This feature has introduced changes related to how sensitive data is managed, how data can be migrated between environments  and how data can be encrypted in custom libraries or policy studio script filters. For further information, see [Update guide](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-77-march-2021-release-7720210330-and-beyond).
+This feature has introduced changes related to how sensitive data is managed, how data can be encrypted in custom libraries or Policy Studio script filters, and how data can be migrated between environments, for example, from this release onwards, encrypted KPS data can no longer be transferred directly between environments with different domain IDs.
 
-### Passphrase Policy Enforcement
+For more information, see [Cipher scheme uses PBKDF2 for all encrypted data](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-77-march-2021-release-7720210330-and-beyond).
 
-A new passphrase policy and 2 new end-points to manage that passphrase policy have been introduced.
+### Passphrase policy enforcement
 
-* GET /topology/passphrasepolicy
-* PUT /topology/passphrasepolicy
-
-The passphrase policy ships by default as ***disabled***. To enable, call the PUT /topology/passphrasepolicy end-point. For more information see, [Configure a passphrase policy](/docs/apim_administration/apigtw_admin/manage_user_access/#configure-a-passphrase-policy-for-node-managers-and-api-gateway-groups).
-
-Once the passphrase policy is ***enabled***, we are enforcing that policy when the node manager or their group passphrases are changed via:
+A new passphrase policy and two new endpoints to manage the policy have been introduced to enforce the policy when the node manager or their group's passphrases are changed via:
 
 * managedomin script
 * PUT /deployment/passphrase/nodemanager/{serviceID}
 * PUT /deployment/passphrase/group/{groupID}
 
-With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases such as 'password’ or ‘1234’ etc.
+With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases, such as `password` or `1234`.
+
+For more information see, [Configure a passphrase policy](/docs/apim_administration/apigtw_admin/manage_user_access/#configure-a-passphrase-policy-for-node-managers-and-api-gateway-groups).
 
 ### Security enhancements to JWT Sign and Verify filters
 
@@ -66,9 +63,9 @@ Rate limit monitors the number of requests that a user can send to API Manager d
 
 For more information, see [Configure the API Manager request rate limiter](/docs/apim_administration/apimgr_admin/api_mgmt_config/#configure-api-manager-request-rate-limiter).
 
-### Certification with MySQl 8
+### Certification with MySQL 8
 
-The product is now certified as compatible with MySQL 8. For further information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
+The product is now certified as compatible with MySQL 8. For more information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
 
 ### YAML configuration store (Technical preview capability)
 
