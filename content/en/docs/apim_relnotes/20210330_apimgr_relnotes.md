@@ -22,7 +22,7 @@ The cipher scheme for all encrypted data in the system (such as Database/LDAP pa
 
 This feature has introduced changes related to how sensitive data is managed, how data can be encrypted in custom libraries or Policy Studio script filters, and how data can be migrated between environments, for example, from this release onwards, encrypted KPS data can no longer be transferred directly between environments with different domain IDs.
 
-For more information, see [Cipher scheme uses PBKDF2 for all encrypted data](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-77-march-2021-release-7720210330-and-beyond).
+For more information, see [Cipher scheme uses PBKDF2 for all encrypted data](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#cipher-scheme-uses-pbkdf2-for-all-encrypted-data).
 
 ### Passphrase policy enforcement
 
