@@ -269,22 +269,18 @@ The entity store will be re-encrypted as part of the update process.
 
 The Key property store will not be re-encrypted. Therefore, to make use of the new more secure cipher scheme for the key property store data, run the KPS Admin Re-encrypt command. For more information see, [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
-Encrypted KPS data can no longer be transferred directly between environments with different domain ids from this release onwards, even where the passphrase in use is the same in both environments. This is because the new encryption scheme uses a master salt which is based on the domain Id of the environment and transferring data directly could result in performance degradation. Instead, you must either:
+Encrypted KPS data can no longer be transferred directly between environments with different domain ids from this release onwards, even where the passphrase in use is the same in both environments. Instead, you must either:
 
 * Use the KPS Admin Backup and Restore process. The restore command will now decrypt the data from the source environment and re-encrypt the data for the target environment. For more information see, [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore)
 Or
 * Use the Cassandra Backup and Restore process and run KPS Admin re-encrypt. For more information see, [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) and [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
-Customers instantiating a PasswordCipher in custom libraries, or in Policy Studio script filters, should be aware that the enhanced cipher algorithms may result in longer generation times than previously. While not recommended, it is possible to revert to the previous weaker ciphers if absolutely necessary, should performance be the higher concern. This can be achieved using a setMode() method such as in the following jython snippet:
+Customers instantiating a PasswordCipher in custom libraries, or in Policy Studio script filters, should be aware that the enhanced cipher algorithm may result in longer generation times than previously. While not recommended, it is possible to revert to the previous weaker ciphers if absolutely necessary, should performance be the higher concern. This can be achieved using a setMode method such as in the following jython snippet:
 
    ```
    from com.vordel.common.crypto import PasswordCipher
-   from com.vordel.trace import Trace
-   from  java.nio.charset import StandardCharsets
-   from java.lang import String, System
-   from java.util import Base64
-
+   
    def invoke(msg):
-      cipher = PasswordCipher("12345".toCharArray())
+      cipher = PasswordCipher("ThisIsAPassword!123".toCharArray())
       cipher.setMode(PasswordCipher.Mode.SHA1_3DES)
    ```

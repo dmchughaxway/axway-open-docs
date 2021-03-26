@@ -20,7 +20,7 @@ The following new features and enhancements are available in this update.
 
 The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private Keys etc.) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
 
-This feature has introduced changes related to how sensitive data is managed, how data can be migrated between environments  and how data can be encrypted in custom libraries or policy studio script filters. For further information, see [Upgrade guide](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-7720210330-and-beyond).
+This feature has introduced changes related to how sensitive data is managed, how data can be migrated between environments  and how data can be encrypted in custom libraries or policy studio script filters. For further information, see [Update guide](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updating-to-77-march-2021-release-7720210330-and-beyond).
 
 ### Passphrase Policy Enforcement
 
