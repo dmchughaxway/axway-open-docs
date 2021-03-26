@@ -126,13 +126,16 @@ For more details on API Portal, see [Administer API Portal](/docs/apim_adminis
 **Query string version parameter**
 : Specifies the name of the query string version parameter used to route between different API versions (for example, a value of `v` requires `/my_api?v=1` in the query string, while `version` requires `/my_api?version=1`). The name of the parameter will also be published in the Swagger generated for the front-end API in the API Catalog. For a detailed example, see [Configure API routing based on version query string](/docs/apim_administration/apimgr_admin/api_mgmt_version_routing/).
 
-**Registration token creation email**
-: Enable or disable the self-generated email with the registration token when an organization is being created. This is disabled by default.
+**Enable registration token email notifications**
+: Enable or disable the self-generated email with the registration token when an organization is being created. This is enabled by default.
 
 ### Password, login, and session management settings
 
+**Session timeout (minutes)**
+: Enter the number of minutes after which API Manager sessions time out. Defaults to `720` minutes (12 hours). Changing this value takes effect immediately.
+
 **Idle session timeout (minutes)**
-: Enter the number of minutes after which idle API Manager sessions time out. Defaults to `60` minutes. Changing this value only affects logins made after the change.
+: Enter the number of minutes after which idle API Manager sessions time out. Defaults to `60` minutes. Changing this value takes effect immediately.
 
 **Change password on first login**
 : Select whether to enforce a change of password when a user logs into API Manager for the first time. This is enabled by default.

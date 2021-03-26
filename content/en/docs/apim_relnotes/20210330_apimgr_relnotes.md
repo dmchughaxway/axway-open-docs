@@ -39,11 +39,26 @@ Once the passphrase policy is ***enabled***, we are enforcing that policy when t
 
 With a suitably strict passphrase policy enabled, the user will no longer be able to select extremely weak passphrases such as 'password’ or ‘1234’ etc.
 
-### Critical header parameter (“crit”)
+### Security enhancements to JWT Sign and Verify filters
 
-A “crit” header was added to the JWT Verify filter in Policy Studio. This allows you to add a “crit” header list to the filter, and the JWT token being processed in the filter is then validated against this list.
+Significant changes have been made to the JWT Sign and Verify filters to comply with PSD2. These filters are now much more closely aligned with the [RFC 7515](https://tools.ietf.org/html/rfc7515) and [RFC 7519](https://tools.ietf.org/html/rfc7519) specifications.
 
-For more information, see [JWT verify filter](/docs/apim_policydev/apigw_polref/integrity_additional/#jwtverify-filter).
+Note that API Gateway still does not support:
+
+* JWS JSON Serialization
+* Nested JWTs
+* Unsecured JWTs
+
+For more information, see:
+
+* [JWT Sign filter](/docs/apim_policydev/apigw_polref/integrity_additional/#jwtsign-filter)
+* [JWT Verify filter](/docs/apim_policydev/apigw_polref/integrity_additional/#jwtverify-filter)
+
+### Automatic upgrade of projects in Policy Studio
+
+After applying [API Gateway One Version](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/) update to Policy Studio, opening a pre-existing project will now offer to automatically upgrade the project.
+
+For more information, see [Upgrade of project after 7.7 One Version update](/docs/apim_policydev/apigw_poldev/gs_project/#upgrade-of-project-after-77-one-version-update).
 
 ### API Manager request rate limiter
 
@@ -97,7 +112,9 @@ This version of API Gateway and API Manager includes:
 
 ### Fixed security vulnerabilities
 
-table of security issues
+| Internal ID | Case ID            | Cve Identifier                               | Description                                                                                                                                                                                                                                                                                                 |
+| ----------- | ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RDAPI-23337 | | CVE-2018-1320 CVE-2019-0205 | **Issue**: Apache Cassandra includes libthrift library which has known vulnerabilities. **Resolution**: New installations which opt to install Cassandra from the API Gateway installation packages will include the upgraded libthrift 0.9.3-1 library that addresses these two known vulnerabilities. Existing customers are advised to upgrade the libthrift library to 0.9.3-1 in their Cassandra environments.                                                                                                         |
 
 ### Other fixed issues
 
