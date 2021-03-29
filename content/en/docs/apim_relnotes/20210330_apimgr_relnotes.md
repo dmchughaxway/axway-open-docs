@@ -63,6 +63,12 @@ Rate limit monitors the number of requests that a user can send to API Manager d
 
 For more information, see [Configure the API Manager request rate limiter](/docs/apim_administration/apimgr_admin/api_mgmt_config/#configure-api-manager-request-rate-limiter).
 
+### HTTP strict transport security profile
+
+In order to be compliant with security best practices, HTTP Strict Transport Security (HSTS) support has been added to API Gateway. Profiles can be configured within Policy Studio.
+
+For more information, see [Configure HTTP strict transport security](/docs/apim_policydev/apigw_gw_instances/configure_http_strict_transport_security).
+
 ### Certification with MySQL 8
 
 The product is now certified as compatible with MySQL 8. For more information see, [Third Party JDBC Drivers](/docs/apim_installation/apigtw_install/metrics_db_install/#add-third-party-jdbc-driver-files).
