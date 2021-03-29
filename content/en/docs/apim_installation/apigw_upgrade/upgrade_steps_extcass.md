@@ -214,9 +214,9 @@ To verify that the upgrade has been successful:
 * Start Policy Studio, and create a new project based on the running API Gateway. You can view the upgraded configuration (for example, policies, settings, and so on).
 * If you were using OAuth client applications in your old installation, start the Client Application Registry web interface, and view the client applications.
 
-### Step 6 - Update Cipher scheme for Key property store
+### Step 6 - Update cipher scheme
 
-To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update Cipher scheme for Key property store](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme-for-key-property-store).
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
 
 ## Upgrade steps - Multi-node upgrade example
 
@@ -353,9 +353,9 @@ For the sample topology you can also perform the following checks to verify the 
 2. Log in as an administrator user and view the organizations, application developers, and applications.
 3. Log in as a non-administrator user and view the applications.
 
-### Step 7 - Update Cipher scheme
+### Step 7 - Update cipher scheme
 
-To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update Cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
 
 {{< alert title="Note" color="primary" >}}The `kpsadmin` command with the `reencrypt` option only needs to be run on one node.{{< /alert >}}
 
