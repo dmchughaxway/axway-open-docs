@@ -214,6 +214,10 @@ To verify that the upgrade has been successful:
 * Start Policy Studio, and create a new project based on the running API Gateway. You can view the upgraded configuration (for example, policies, settings, and so on).
 * If you were using OAuth client applications in your old installation, start the Client Application Registry web interface, and view the client applications.
 
+### Step 6 - Update Cipher scheme for Key property store
+
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update Cipher scheme for Key property store](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme-for-key-property-store).
+
 ## Upgrade steps - Multi-node upgrade example
 
 This topic provides an example of a multi-node domain upgrade from API Gateway version 7.5.x or 7.6.x (in this case, 7.5.1) to API Gateway 7.7.
@@ -348,6 +352,12 @@ For the sample topology you can also perform the following checks to verify the 
 1. Connect to the API Manager web console (for example, on `https://NodeA:8075/`).
 2. Log in as an administrator user and view the organizations, application developers, and applications.
 3. Log in as a non-administrator user and view the applications.
+
+### Step 7 - Update Cipher scheme
+
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Update Cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
+
+{{< alert title="Note" color="primary" >}}The `kpsadmin` command with the `reencrypt` option only needs to be run on one node.{{< /alert >}}
 
 ## After you upgrade
 

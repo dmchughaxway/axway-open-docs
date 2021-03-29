@@ -257,7 +257,7 @@ Updating API Manager is now carried out during the application of the latest API
 * API Manager `.fed` files can be upgraded using the [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) script.
 * The [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options) script will apply API Manager updates to any existing projects.
 
-## Update Cipher scheme for Key property store
+## Updated Cipher scheme
 
 The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, private keys, and so on) uses PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks. The cipher scheme is backwards compatible with previous versions of the cipher scheme, and it is able to decrypt data, which was encrypted in the old cipher scheme.
 
