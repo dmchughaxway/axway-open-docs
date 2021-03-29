@@ -22,7 +22,7 @@ The cipher scheme for all encrypted data in the system (such as Database/LDAP pa
 
 This feature has introduced changes related to how sensitive data is managed, how data can be encrypted in custom libraries or Policy Studio script filters, and how data can be migrated between environments, for example, from this release onwards, encrypted KPS data can no longer be transferred directly between environments.
 
-For more information, see [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#updated-cipher-scheme).
+For more information, see [Update cipher scheme](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme).
 
 ### Passphrase policy enforcement
 
