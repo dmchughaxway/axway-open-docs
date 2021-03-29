@@ -257,22 +257,26 @@ Updating API Manager is now carried out during the application of the latest API
 * API Manager `.fed` files can be upgraded using the [upgradeconfig](/docs/apim_installation/apigw_upgrade/upgrade_analytics#upgradeconfig-options) script.
 * The [projupgrade](/docs/apim_reference/devopstools_ref#projupgrade-command-options) script will apply API Manager updates to any existing projects.
 
-## Cipher scheme uses PBKDF2 for all encrypted data
+## Update Cipher scheme for Key property store
 
-The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, private keys, and so on) uses PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
+The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, private keys, and so on) uses PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks. The cipher scheme is backwards compatible with previous versions of the cipher scheme, and it is able to decrypt data, which was encrypted in the old cipher scheme.
 
-The cipher scheme is backwards compatible with [previous versions of the cipher scheme](/docs/apimgmt_security/compliance_appendix/), and it is able to decrypt data, which was encrypted in the old cipher scheme.
+The Entity store is re-encrypted with PBKDF2 as part of API Gateway update process, but the Key property store will not be re-encrypted.
 
-The Entity store is re-encrypted with PBKDF2 as part of API Gateway update process, but the Key property store will not be re-encrypted. Therefore, to make use of a more secure cipher scheme for the key property store data, you must run the `kpsadmin` command to re-encrypt the KPS data. For more information see, [Re-encrypt the KPS data](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
+To make use of a more secure cipher scheme, you must re-encrypt your KPS data using the `kpsadmin` command. For more information see, [Re-encrypt the KPS data](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
-Encrypted KPS data cannot be transferred directly between environments with different domain IDs, even where the passphrase in use is the same in both environments. Instead, you must use one of the following options:
+### Transfer KPS data between environments
 
-* Use the [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore) process. The restore command decrypts the data from the source environment and re-encrypt the data for the target environment.
+Encrypted KPS data cannot be transferred directly between environments even when the passphrase in use is the same in both environments. Instead, you must use one of the following options:
+
+* Use the [KPS Admin Backup and Restore](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#back-up-and-restore) process. The restore command decrypts the data from the source environment and re-encrypts the data for the target environment.
 * Use the [Cassandra Backup and Restore](/docs/cass_admin/cassandra_bur/) process and run [KPS Admin Re-Encrypt](/docs/apim_policydev/apigw_kps/how_to_use_kpsadmin_command/#re-encrypt-the-kps-data).
 
-When instantiating a `PasswordCipher` in custom libraries or in Policy Studio script filters, be aware that this enhanced cipher algorithm might result in long generation times. While not recommended, it is possible to revert to the previous weaker ciphers if absolutely necessary, should performance be the higher concern.
+### Use the Cipher scheme with custom code
 
-To revert to an old version of the Cipher's algorithm, you can use the `setMode` method, such as in the following `jython` snippet:
+When instantiating a `PasswordCipher` in custom libraries or in Policy Studio script filters, be aware that this enhanced cipher algorithm will result in longer generation times. While not recommended, it is possible to revert to the previous weaker cipher if absolutely necessary, should performance be the higher concern.
+
+To revert to the weaker cipher algorithm, you can use the `setMode` method, such as in the following `jython` snippet:
 
    ```
    from com.vordel.common.crypto import PasswordCipher

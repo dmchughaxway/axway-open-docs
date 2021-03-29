@@ -16,13 +16,13 @@ Docker deployment is supported on Linux. For a summary of the system requirement
 
 The following new features and enhancements are available in this update.
 
-### Upgraded Cipher Scheme
+### Update Cipher scheme for Key property store
 
 The cipher scheme for all encrypted data in the system (such as Database/LDAP passwords, Private keys, and son on) has been enhanced to use PBKDF2 (Password based key derivation function 2) with more secure parameters. This reduces vulnerability to brute force attacks.
 
 This feature has introduced changes related to how sensitive data is managed, how data can be encrypted in custom libraries or Policy Studio script filters, and how data can be migrated between environments, for example, from this release onwards, encrypted KPS data can no longer be transferred directly between environments with different domain IDs.
 
-For more information, see [Cipher scheme uses PBKDF2 for all encrypted data](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#cipher-scheme-uses-pbkdf2-for-all-encrypted-data).
+For more information, see [Cipher scheme uses PBKDF2 for all encrypted data](/docs/apim_installation/apigw_upgrade/upgrade_steps_oneversion/#update-cipher-scheme-for-key-property-store).
 
 ### Passphrase policy enforcement
 
